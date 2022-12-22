@@ -14,7 +14,6 @@
   
   <script>
   import Sidebar from '../components/layout/Sidebar'
-  
   export default {
     components: {
       'app-sidebar': Sidebar
