@@ -6,9 +6,16 @@
       pariatur perferendis ad atque similique officiis, sapiente accusantium eos odit aspernatur deserunt. Blanditiis,
       aut molestias.
     </p>
+    <AR />
   </div>
 </template>
 
 <script>
-export default {}
+import AR from '../components/Ar.vue'
+export default {
+  // name: 'Home',
+  components:{
+    AR
+  }
+}
 </script>
