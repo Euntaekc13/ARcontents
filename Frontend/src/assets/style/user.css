@@ -1,0 +1,46 @@
+.search-engine{
+    height: 30%;
+    width: 100%;
+    display: flex;
+}
+
+.form-control {
+    width: 10%;
+    box-sizing: border-box;
+    background-color: #e2e4e6;
+    border: 1px solid #cdd2d4;
+    border-radius: 3px;
+    display: block;
+    margin-left: 2%;
+    margin-bottom: 12px;
+    padding: 6px 8px;
+    transition: background-color .3s;
+}
+input[type=text].form-control,
+input[type=password].form-control,
+textarea.form-control {
+    font-size: 14px;
+}
+.form-control:focus {
+    background-color: #fff;
+}
+
+.btn-success {
+    border-radius: 3px;
+    height: 30px;
+    margin-left: 2%;
+    padding: 6px 8px;
+    background-color: #1d2ccf;
+    box-shadow: 0 1px 0 #263fbe;
+    border: none;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 20px; 
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+}
+
+.table{
+    
+}

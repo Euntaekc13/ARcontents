@@ -1,0 +1,24 @@
+.content-body {
+width: 100%;
+}
+.separate-body {
+height: 10px;
+background-color: skyblue;
+}
+
+.btn {
+    border-radius: 3px;
+    padding: 6px 8px;
+    background-color: #e2e4e6;
+    border: none;
+    display: inline-block;
+    color: #fff;
+    font-size: 14px;
+    line-height: 20px;  
+    font-weight: 700;
+    cursor: pointer;
+}
+.btn-success {
+    background-color: #5aac44;
+    box-shadow: 0 1px 0 #519839;
+}

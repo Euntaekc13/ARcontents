@@ -1,0 +1,23 @@
+.sidebar {
+    background-color: rgba(255, 255, 0, 0.15);
+    height: 80vh;
+    width: 15%;
+}
+.sidebar a {
+    display: block;
+    height: 50px;
+    line-height: 50px;
+    padding-left: 15px;
+    padding-right: 15px;
+    text-align:left;
+    text-decoration: none;
+    color: rgba(0,0,0,.8);
+}
+.sidebar-button{
+    border: 1px solid #cdd2d4;
+    font-size: 18px;
+}
+.sidebar-button a:hover,
+.sidebar-button a:focus {
+    background-color: rgb(255, 150, 0, 0.5);
+}
