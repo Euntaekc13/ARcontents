@@ -3,13 +3,16 @@ class Render{
         this.status = true;
     }
 
-    start(){
-        this.status = window.requestAnimationFrame(() => {
-            this.renderer.render(this.scene, this.camera);
-            this.controls.update();
-            this.start();
-        });
-    }
+    // start(){
+    //     this.status = window.requestAnimationFrame(() => {
+    //         this.renderer.render(this.scene, this.camera);
+    //         arToolkitContext.update(arToolkitSource.domElement);
+    //         scene.visible = camera.visible
+    //         mesh.rotation.x += 0.03
+    //         requestAnimationFrame( start );
+    //         this.start();
+    //     });
+    // }
 
     stop(){
         window.cancelAnimationFrame(this.status);

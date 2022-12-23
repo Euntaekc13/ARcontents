@@ -17,21 +17,23 @@ class Scene{
     }
 
     setScene(){
-    this.scene.background = new THREE.Color( 0x101010 );
-
     this.scene.add(this.resource.animalG)
-
     this.scene.add(this.light.ambientLight)
-
     this.scene.add(this.camera.camera)
-
     this.scene.add(this.light.dirLight)
     }
     
     setMesh(){
-        this.mesh = new THREE.Mesh( new THREE.PlaneGeometry( 2000, 2000 ), new THREE.MeshPhongMaterial( { color: 0x999999, depthWrite: false } ) );
-        this.mesh.rotation.x = - Math.PI / 2;
-        this.mesh.receiveShadow = true;
+        this.scene.visible = false
+        this.mesh = new THREE.Mesh( 
+            new THREE.CylinderGeometry(10, 10, 10, 20), 
+            new THREE.MeshNormalMaterial({
+                transparent : true,
+                opacity: 0,
+                side: THREE.DoubleSide
+            }) 
+            )
+	    this.mesh.position.y= this.mesh.geometry.parameters.height/2
 
         this.scene.add(this.mesh);
     }
