@@ -4,10 +4,10 @@ import { Camera } from "./camera";
 import { Light } from "./light";
 
 class Scene{
-    constructor(file = null){
+    constructor(data = null){
         this.scene = new THREE.Scene();
 
-        this.resource = new Resource(file);
+        this.resource = new Resource(data);
         this.camera = new Camera();
         this.light = new Light();
 
@@ -19,7 +19,7 @@ class Scene{
     setScene(){
     this.scene.background = new THREE.Color( 0x101010 );
 
-    this.scene.add(this.resource.obj)
+    this.scene.add(this.resource.animalG)
 
     this.scene.add(this.light.ambientLight)
 

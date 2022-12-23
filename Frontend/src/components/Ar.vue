@@ -13,7 +13,7 @@ import { Control } from '../WebGL/control'
     name:'Ar',
     data(){
         return {
-
+            data: '고양이'
         }
     },
     mounted(){
@@ -26,7 +26,7 @@ import { Control } from '../WebGL/control'
             Img.style.width = '100%'
             Img.style.height = '100%'
 
-            let scene = new Scene()
+            let scene = new Scene(this.data)
             let cameraElement = scene.camera.cameraElement
             let sceneElement = scene.sceneElement
             
