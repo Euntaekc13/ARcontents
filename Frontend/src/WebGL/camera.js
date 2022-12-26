@@ -1,15 +1,15 @@
-import { CinematicCamera } from "three/examples/jsm/cameras/CinematicCamera";
+// import { CinematicCamera } from "three/examples/jsm/cameras/CinematicCamera";
+import * as THREE from "three";
 
 class Camera{
     constructor(){
-        this.camera = new CinematicCamera( 1000, 1, 1, 2000 );
-
-        this.setCamera();
+        this.camera = new THREE.Camera();
+        // this.setCamera();
     }
 
-    setCamera(){
-        this.camera.position.set(100, 100, 100);
-    }
+    // setCamera(){
+    //     this.camera.position.set(100, 100, 100);
+    // }
 
     get cameraElement(){
         return this.camera;
