@@ -28,7 +28,6 @@ textarea.form-control {
 .btn-success {
     border-radius: 3px;
     height: 30px;
-    margin-left: 2%;
     padding: 6px 8px;
     background-color: #1d2ccf;
     box-shadow: 0 1px 0 #263fbe;
@@ -42,5 +41,9 @@ textarea.form-control {
 }
 
 .table{
-    
+    margin-left: 2%;
+}
+
+.table-section{
+    border: 1px solid black;
 }
