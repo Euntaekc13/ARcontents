@@ -5,11 +5,8 @@
 </template>
 
 <script>
-// import { Scene } from '../WebGL/scene'
-// import { Renderer } from '../WebGL/renderer'
-// import { Render } from '../WebGL/render'
 import * as THREE from "three";
-// import { Control } from '../WebGL/control'
+import Stats from 'three/addons/libs/stats.module.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import { AmbientLight, DirectionalLight } from 'three'
 import { ArToolkitSource, ArToolkitContext, ArMarkerControls} from '../WebGL/ar-threex';
@@ -18,7 +15,7 @@ export default {
     name:'Ar',
     data(){
         return {
-            data: '고양이'
+            data: '사람' //select 데이터 조건 값
         }
     },
     mounted(){
@@ -26,14 +23,14 @@ export default {
     },
     methods:{
         Graphics(){
-            // const Img = document.querySelector(`.Img${this.processData.processType}`)
             var renderer = new THREE.WebGLRenderer({
                 antialias: true,
                 alpha: true
             });
+            //애니메이션 설정에서 사용할 변수명 
+            let mixer 
 
-
-            //class renderer
+            //
             renderer.setClearColor(new THREE.Color('lightgrey'), 0)
             renderer.setSize( 640, 480 );
             renderer.domElement.style.position = 'absolute'
@@ -41,20 +38,24 @@ export default {
             renderer.domElement.style.left = '0px'
             document.body.appendChild( renderer.domElement );
 
-
-
+            let stats = new Stats();
 
             var scene	= new THREE.Scene();
             var camera = new THREE.Camera();
             scene.add(camera);
-            var arToolkitSource = new ArToolkitSource({   // ②카메라 탐색
+
+
+            //-------------------------------------------------------------------------
+            //                            AR설정
+            //-------------------------------------------------------------------------
+            
+            // ②카메라 탐색
+            var arToolkitSource = new ArToolkitSource({   
                 sourceType : 'webcam',
             })
-
             arToolkitSource.init(function onReady(){
                 onResize()
             })
-
 
             // ③디바이스 크기에 맞게 사이즈 조절하는 함수 설정
             window.addEventListener('resize', function(){
@@ -72,65 +73,112 @@ export default {
                 cameraParametersUrl: ArToolkitContext.baseURL + '../data/data/camera_para.dat',
                 detectionMode: 'mono',
             })
-
             // initialize it
             arToolkitContext.init(function onCompleted(){
-            // copy projection matrix to camera
                 camera.projectionMatrix.copy( arToolkitContext.getProjectionMatrix() );
             })
-
+            //사용할 마크 등록
             var markerControls = new ArMarkerControls(arToolkitContext, camera, {
                 type : 'pattern',
                 patternUrl : ArToolkitContext.baseURL + '../data/data/patt.hiro',
                 changeMatrixMode: 'cameraTransformMatrix'
             })
-    
             scene.visible = false
+            //-------------------------------------------------------------------------
+            //                       물체 노출 영역
+            //-------------------------------------------------------------------------
             var geometry = new THREE.BoxGeometry(10,10,10);
             var material = new THREE.MeshNormalMaterial({
                 transparent : true,
                 opacity: 0,
                 side: THREE.DoubleSide
-            }); 
+            });             
             var mesh = new THREE.Mesh( geometry, material );
             mesh.position.y	= geometry.parameters.height/2
             scene.add( mesh );
 
-
+            //-------------------------------------------------------------------------
+            //                          조명설정 
+            //-------------------------------------------------------------------------
             const ambientLight = new AmbientLight(0x20202a, 6.5, 100)
             const dirLight = new DirectionalLight(0xffffff, 0.5)
             dirLight.position.set(2, 10, 1)
             scene.add(ambientLight)
             scene.add(dirLight)
 
-            // //물체
-            // var geometry = new THREE.BoxGeometry(0.2,0.2,0.2);
-            // var material = new THREE.MeshNormalMaterial({
-            //     // transparent : true,
-            //     // // opacity: 0.1,
-            //     // side: THREE.DoubleSide
-            // }); 
-            // var mesh = new THREE.Mesh( geometry, material );
-            // mesh.position.y	= 1
-            // scene.add( mesh );
+            //-------------------------------------------------------------------------
+           //                         FBX파일 로더
+           //-------------------------------------------------------------------------
             let loader = new FBXLoader();
-            loader.load('/fbx/cat.fbx', object => {
+            if(this.data == '고양이'){
+                loader.load('/fbx/standcat.fbx', object => {
                 let Object = object
                 Object.name = 'cat'
-                Object.scale.x = Object.scale.y = Object.scale.z = 0.002
+                Object.scale.x = Object.scale.y = Object.scale.z = 0.02
                 Object.position.set(0, 1, 0)
                 scene.add(Object)
-              })
 
+                //animation 설정 
+                const animations = object.animations;
+                console.log(animations);
+                mixer = new THREE.AnimationMixer( object )
+                mixer.clipAction(animations[0]).play(); //FBX파일에 설정된 animation 배열에 있는 animation을 실행시키는 코드
+                
+                //렌더링 호출
+                animate(mixer);
+                })
+            } else if( this.data == '강아지') {
+                loader.load('/fbx/dog.fbx', object => {
+                let Object = object
+                Object.name = 'cat'
+                Object.scale.x = Object.scale.y = Object.scale.z = 0.02
+                Object.position.set(0, 1, 0)
+                scene.add(Object)
+
+                //animation 설정 
+                const animations = object.animations;
+                console.log(animations);
+                mixer = new THREE.AnimationMixer( object )
+                mixer.clipAction(animations[0]).play(); //FBX파일에 설정된 animation 배열에 있는 animation을 실행시키는 코드
+                
+                //렌더링 호출
+                animate(mixer);
+                })
+            } else {
+                loader.load('/fbx/human.fbx', object => {
+                let Object = object
+                Object.name = 'cat'
+                Object.scale.x = Object.scale.y = Object.scale.z = 0.02
+                Object.position.set(0, 1, 0)
+                scene.add(Object)
+
+                //animation 설정 
+                const animations = object.animations;
+                console.log(animations);
+                mixer = new THREE.AnimationMixer( object )
+                mixer.clipAction(animations[0]).play(); //FBX파일에 설정된 animation 배열에 있는 animation을 실행시키는 코드
+                
+                //렌더링 호출
+                animate(mixer);
+              })
+            }
+        
+
+            const clock = new THREE.Clock();    
+            //-------------------------------------------------------------------------
+            //                            렌더링 함수
+            //-------------------------------------------------------------------------
             function animate() {
                 renderer.render( scene, camera );
                 arToolkitContext.update(arToolkitSource.domElement);
-                scene.visible = camera.visible
-                // mesh.rotation.x += 0.03
+                scene.visible = camera.visible  
+                const mixerUpdateDelta = clock.getDelta();
+                mixer.update( mixerUpdateDelta )
+                stats.update();
                 requestAnimationFrame( animate );
             };
-
-            animate();
+            
+            
         }
     }
 
