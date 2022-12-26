@@ -30,7 +30,7 @@ export default {
             //애니메이션 설정에서 사용할 변수명 
             let mixer 
 
-            //
+
             renderer.setClearColor(new THREE.Color('lightgrey'), 0)
             renderer.setSize( 640, 480 );
             renderer.domElement.style.position = 'absolute'
@@ -40,7 +40,7 @@ export default {
 
             let stats = new Stats();
 
-            var scene	= new THREE.Scene();
+            var scene = new THREE.Scene();
             var camera = new THREE.Camera();
             scene.add(camera);
 
@@ -48,7 +48,6 @@ export default {
             //-------------------------------------------------------------------------
             //                            AR설정
             //-------------------------------------------------------------------------
-            
             // ②카메라 탐색
             var arToolkitSource = new ArToolkitSource({   
                 sourceType : 'webcam',
