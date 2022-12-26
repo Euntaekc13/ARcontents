@@ -5,30 +5,39 @@
       <div>
         <label for="userid">아이디</label>
         <input class="form-control" type="text" name="아이디" 
-          v-model="userid" autofocus placeholder="아이디" />
+        v-model="userid" autofocus placeholder="아이디" />
       </div>
       <div>
         <label for="password">패스워드</label>
         <input class="form-control" type="password" 
           v-model="password" placeholder="비밀번호" />
       </div>
-      <button  class="btn" :class="{'btn-success': !invalidForm}" type="submit" 
-        :disabled="invalidForm">Log In</button>
+      <div class="button-align">
+      <button class="btn" :class="{'btn-success': !invalidForm}" type="submit" 
+      :disabled="invalidForm">Log In</button>
+      <div v-if="signup">
+        <Signup @close="signup=false"/>
+      </div>
+      <div v-else>
+        <button class="signup-btn" @click.prevent="signup=true">
+          회원가입
+        </button>
+      </div>
+    </div>
     </form>
     <p class="loading" v-if="loading">로그인 중입니다...</p>
-    <!-- <a href="" @click="onClickAddNew">회원가입</a>
-    <Modal></Modal> -->
   </div>
 </template>
 
 <script>
 import jwtDecode from "jwt-decode";
-import Modal from '@/components/layout/Modal.vue';
+import Signup from '@/components/Signup.vue';
 
 export default {
-  components: { Modal },
+  components: { Signup },
   data() {
     return {
+      signup: false,
       userid: null,
       password: null,
     };

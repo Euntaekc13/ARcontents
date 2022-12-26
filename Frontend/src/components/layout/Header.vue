@@ -9,8 +9,8 @@
       <router-link to="/">Home</router-link>
     </div>
     <div class="header-auth">
-      <a href="" v-if="isLoggedin" @click.prevent="onClick('/auth/logout')">
-        Logout</a>
+      <router-link to="/auth/logout" v-if="isLoggedin" @click.prevent="onClick()">
+        Logout</router-link>
       <router-link v-else to="/auth/login">Login</router-link>
     </div>
   </nav>
@@ -37,9 +37,8 @@ export default {
     },
   },
   methods: {
-    onClick(path) {
+    onClick() {
       this.$store.dispatch('authLogout')
-      this.$router.push(path);
     },
   },
 };

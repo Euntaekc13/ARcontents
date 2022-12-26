@@ -26,3 +26,27 @@ textarea.form-control {
 .form-control:focus {
     background-color: #fff;
 }
+
+.button-align {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup-btn {
+    border-radius: 3px;
+    padding: 6px 8px;
+    background-color: #14bc68;
+    border: none;
+    display: inline-block;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 20px;  
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.signup-btn:hover,
+.signup-btn:focus {
+    background-color: rgba(0,0,255, .5);
+}

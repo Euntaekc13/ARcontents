@@ -19,13 +19,11 @@ export default {
     ProfileUser: { ...stateInit.ProfileUser },
     UpdatedResult: null,
     DeletedResult: null,
-    // Error: null,
   },
   getters: {
     ProfileUser: state => state.ProfileUser,
     ProfileUserUpdatedResult: state => state.UpdatedResult,
     ProfileUserDeletedResult: state => state.DeletedResult,
-    // ProfileError: state => state.Error
   },
   mutations: {
     setProfileUser(state, data) {
@@ -37,22 +35,15 @@ export default {
     setDeletedResult(state, data) {
       state.DeletedResult = data
     },
-    // setError(state, data) {
-    //   state.Error = data
-    //   state.ProfileUser = { ...stateInit.ProfileUser }
-    // },
-    // clearError(state) {
-    //   state.Error = null
-    // },
   },
   actions: {
     // 프로필 정보 조회
-    actProfileUserInfo(context, payload) {
+    async actProfileUserInfo(context, payload) {
       // 상태값 초기화
       context.commit("setProfileUser", { ...stateInit.ProfileUser });
 
       /* RestAPI 호출 */
-      api
+      await api
         .get(`/serverApi/users`)
         .then((response) => {
           const profileuser = response && response.data;
@@ -68,7 +59,6 @@ export default {
     // 프로필 정보 수정
     actProfileUserUpdate(context, payload) {
       // 상태값 초기화
-      context.commit('clearError')
       context.commit("setUpdatedResult", null);
 
       /* RestAPI 호출 */
@@ -80,10 +70,7 @@ export default {
           context.commit("setUpdatedResult", updatedResult);
         })
         .catch((error) => {
-          // 에러인 경우 처리
-          // console.log(payload)
-          // context.commit('setError', error)
-          context.commit("setUpdatedResult", -1);
+          context.commit("setUpdatedResult", error.response.data);
         });
     },
     // 삭제
