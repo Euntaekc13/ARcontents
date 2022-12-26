@@ -44,6 +44,28 @@ textarea.form-control {
     margin-left: 2%;
 }
 
-.table-section{
+.table-section-email{
     border: 1px solid black;
+    width: 200px;
+}
+.table-section-date{
+    border: 1px solid black;
+    width: 200px;
+}
+.table-section-name{
+    border: 1px solid black;
+    width: 100px;
+}
+.table-section-userid{
+    border: 1px solid black;
+    width: 100px;
+}
+.table-section-role{
+    border: 1px solid black;
+    width: 50px;
+}
+.table-section-age{
+    border: 1px solid black;
+    text-align: center;
+    width: 50px;
 }

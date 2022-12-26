@@ -30,21 +30,21 @@
         </div>
       </form>
       <table class="table">
-        <tr>
-          <td class="table-section">이름</td>
-          <td class="table-section">아이디</td>
-          <td class="table-section">파</td>
-          <td class="table-section">나이</td>
-          <td class="table-section">이메일</td>
-          <td class="table-section">생성일자</td>
+        <tr style="background-color: rgba(0, 200, 0, 0.1);">
+          <td class="table-section-name">이름</td>
+          <td class="table-section-userid">아이디</td>
+          <td class="table-section-role">파</td>
+          <td class="table-section-age">나이</td>
+          <td class="table-section-email">이메일</td>
+          <td class="table-section-date">생성일자</td>
         </tr>
         <tr v-for="user in userList" :key="user.id">
-          <td class="table-section">{{ user.name }}</td>
-          <td class="table-section">{{ user.userid }}</td>
-          <td class="table-section">{{ user.role }}</td>
-          <td class="table-section">{{ user.age }}</td>
-          <td class="table-section">{{ user.email }}</td>
-          <td class="table-section">{{ user.createdAt }}</td>
+          <td class="table-section-name">{{ user.name }}</td>
+          <td class="table-section-userid">{{ user.userid }}</td>
+          <td class="table-section-role">{{ user.role }}</td>
+          <td class="table-section-age">{{ user.age }}</td>
+          <td class="table-section-email">{{ user.email }}</td>
+          <td class="table-section-date">{{ user.createdAt }}</td>
         </tr>
       </table>
     </div>
