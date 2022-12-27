@@ -15,7 +15,7 @@ export default {
     name:'Ar',
     data(){
         return {
-            data: '사람' //select 데이터 조건 값
+            data: '고양이' //select 데이터 조건 값
         }
     },
     mounted(){
@@ -23,6 +23,8 @@ export default {
     },
     methods:{
         Graphics(){
+
+
             var renderer = new THREE.WebGLRenderer({
                 antialias: true,
                 alpha: true
@@ -30,7 +32,11 @@ export default {
             //애니메이션 설정에서 사용할 변수명 
             let mixer 
 
-            //
+            const img = document.querySelector('.Img')
+            img.appendChild(renderer.domElement)
+            img.style.width = '100%'
+            img.style.height = '100%'
+
             renderer.setClearColor(new THREE.Color('lightgrey'), 0)
             renderer.setSize( 640, 480 );
             renderer.domElement.style.position = 'absolute'
@@ -40,7 +46,7 @@ export default {
 
             let stats = new Stats();
 
-            var scene	= new THREE.Scene();
+            var scene = new THREE.Scene();
             var camera = new THREE.Camera();
             scene.add(camera);
 
@@ -48,7 +54,6 @@ export default {
             //-------------------------------------------------------------------------
             //                            AR설정
             //-------------------------------------------------------------------------
-            
             // ②카메라 탐색
             var arToolkitSource = new ArToolkitSource({   
                 sourceType : 'webcam',
@@ -87,15 +92,15 @@ export default {
             //-------------------------------------------------------------------------
             //                       물체 노출 영역
             //-------------------------------------------------------------------------
-            var geometry = new THREE.BoxGeometry(10,10,10);
-            var material = new THREE.MeshNormalMaterial({
-                transparent : true,
-                opacity: 0,
-                side: THREE.DoubleSide
-            });             
-            var mesh = new THREE.Mesh( geometry, material );
-            mesh.position.y	= geometry.parameters.height/2
-            scene.add( mesh );
+            // var geometry = new THREE.BoxGeometry(2,2,2);
+            // var material = new THREE.MeshNormalMaterial({
+            //     transparent : true,
+            //     opacity: 0,
+            //     side: THREE.DoubleSide
+            // });             
+            // var mesh = new THREE.Mesh( geometry, material );
+            // mesh.position.y	= geometry.parameters.height
+            // scene.add( mesh );
 
             //-------------------------------------------------------------------------
             //                          조명설정 
@@ -114,8 +119,8 @@ export default {
                 loader.load('/fbx/standcat.fbx', object => {
                 let Object = object
                 Object.name = 'cat'
-                Object.scale.x = Object.scale.y = Object.scale.z = 0.02
-                Object.position.set(0, 1, 0)
+                Object.scale.x = Object.scale.y = Object.scale.z = 0.002
+                Object.position.set(0, 0, 0)
                 scene.add(Object)
 
                 //animation 설정 
@@ -130,9 +135,9 @@ export default {
             } else if( this.data == '강아지') {
                 loader.load('/fbx/dog.fbx', object => {
                 let Object = object
-                Object.name = 'cat'
-                Object.scale.x = Object.scale.y = Object.scale.z = 0.02
-                Object.position.set(0, 1, 0)
+                Object.name = 'dog'
+                Object.scale.x = Object.scale.y = Object.scale.z = 0.002
+                Object.position.set(0, 0, 0)
                 scene.add(Object)
 
                 //animation 설정 
@@ -147,9 +152,9 @@ export default {
             } else {
                 loader.load('/fbx/human.fbx', object => {
                 let Object = object
-                Object.name = 'cat'
-                Object.scale.x = Object.scale.y = Object.scale.z = 0.02
-                Object.position.set(0, 1, 0)
+                Object.name = 'human'
+                Object.scale.x = Object.scale.y = Object.scale.z = 0.015
+                Object.position.set(0, 0, 0)
                 scene.add(Object)
 
                 //animation 설정 
@@ -185,5 +190,13 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+video {
+    margin:13% 0 0 0;
+}
+canvas {
+    height: 100%;
+    width: 80%;
+    margin: 10% 0 0 0;
+}
 </style>
