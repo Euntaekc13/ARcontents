@@ -1,14 +1,17 @@
 <template>
     <div>
         <div class="Img"></div>
-        <div>
-            <div id="app">
-                <select v-model="selected" style="position:absolute;">
-                    <option disabled value="">Please select one</option>
-                    <option>고양이</option>
-                    <option>강아지</option>
-                    <option>사람</option>
-                </select>
+        <div class="select_Box">
+            <div class="select_option">
+                <button class="selected">
+                    <a  href="/home/cat" style="text-decoration: none; color:black;"> 고양이 </a>
+                </button>
+                <button class="selected">
+                    <a  href="/home/dog" style="text-decoration: none; color:black;"> 강아지 </a>
+                </button>
+                <button class="selected">
+                    <a  href="/home/human" style="text-decoration: none; color:black;"> 사람 </a>
+                </button>
             </div>
         </div>
     </div>
@@ -25,7 +28,7 @@ export default {
     name:'Ar',
     data(){
         return {
-            selected: '' ,//select 데이터 조건 값
+            selected: this.$route.params.id ,//select 데이터 조건 값
             renderStatus: false
         }
     },
@@ -113,7 +116,7 @@ export default {
            //                         FBX파일 로더
            //-------------------------------------------------------------------------
             let loader = new FBXLoader();
-            if(this.selected == '고양이'){
+            if(this.selected == 'cat'){
                 loader.load('/fbx/standcat.fbx', object => {
                 let Object = object
                 Object.name = 'cat'
@@ -130,7 +133,7 @@ export default {
                 //렌더링 호출
                 animate();
                 })
-            } else if( this.selected == '강아지') {
+            } else if( this.selected == 'dog') {
                 loader.load('/fbx/dog.fbx', object => {
                 let Object = object
                 Object.name = 'dog'
@@ -147,7 +150,7 @@ export default {
                 //렌더링 호출
                 animate(mixer);
                 })
-            } else if( this.selected == '사람' ){
+            } else if( this.selected == 'human' ){
                 loader.load('/fbx/human.fbx', object => {
                 let Object = object
                 Object.name = 'human'
@@ -195,5 +198,17 @@ canvas {
     height: 50%;
     width: 50%;
     margin: 10% 0 0 0;
+}
+.select_option{
+    display: flex;
+}
+
+.selected{
+    margin-right: 1em;
+}
+.select_Box{
+    margin-left: 30%;
+    position:absolute;
+    top: 100px;
 }
 </style>
