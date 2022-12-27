@@ -3,9 +3,8 @@
     <h1 style="margin-left: 2%">Home</h1>
     <div style="display:flex;">
       <div class="main">
-        <AR/>
+        <AR />
       </div>
-      <div style="margin-left:5%">togle box</div>
     </div>
   </div>
 </template>

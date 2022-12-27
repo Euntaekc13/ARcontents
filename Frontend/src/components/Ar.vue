@@ -1,6 +1,16 @@
 <template>
     <div>
         <div class="Img"></div>
+        <div>
+            <div id="app">
+                <select v-model="selected" style="position:absolute;">
+                    <option disabled value="">Please select one</option>
+                    <option>고양이</option>
+                    <option>강아지</option>
+                    <option>사람</option>
+                </select>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -15,7 +25,13 @@ export default {
     name:'Ar',
     data(){
         return {
-            data: '고양이' //select 데이터 조건 값
+            selected: '' ,//select 데이터 조건 값
+            renderStatus: false
+        }
+    },
+    watch:{
+        selected: function (val) {
+            this.Graphics()
         }
     },
     mounted(){
@@ -23,19 +39,16 @@ export default {
     },
     methods:{
         Graphics(){
-
-
             var renderer = new THREE.WebGLRenderer({
                 antialias: true,
                 alpha: true
             });
             //애니메이션 설정에서 사용할 변수명 
             let mixer 
-
             const img = document.querySelector('.Img')
             img.appendChild(renderer.domElement)
-            img.style.width = '100%'
-            img.style.height = '100%'
+            img.style.width = '50%'
+            img.style.height = '50%'
 
             renderer.setClearColor(new THREE.Color('lightgrey'), 0)
             renderer.setSize( 640, 480 );
@@ -49,8 +62,6 @@ export default {
             var scene = new THREE.Scene();
             var camera = new THREE.Camera();
             scene.add(camera);
-
-
             //-------------------------------------------------------------------------
             //                            AR설정
             //-------------------------------------------------------------------------
@@ -90,19 +101,6 @@ export default {
             })
             scene.visible = false
             //-------------------------------------------------------------------------
-            //                       물체 노출 영역
-            //-------------------------------------------------------------------------
-            // var geometry = new THREE.BoxGeometry(2,2,2);
-            // var material = new THREE.MeshNormalMaterial({
-            //     transparent : true,
-            //     opacity: 0,
-            //     side: THREE.DoubleSide
-            // });             
-            // var mesh = new THREE.Mesh( geometry, material );
-            // mesh.position.y	= geometry.parameters.height
-            // scene.add( mesh );
-
-            //-------------------------------------------------------------------------
             //                          조명설정 
             //-------------------------------------------------------------------------
             const ambientLight = new AmbientLight(0x20202a, 6.5, 100)
@@ -115,7 +113,7 @@ export default {
            //                         FBX파일 로더
            //-------------------------------------------------------------------------
             let loader = new FBXLoader();
-            if(this.data == '고양이'){
+            if(this.selected == '고양이'){
                 loader.load('/fbx/standcat.fbx', object => {
                 let Object = object
                 Object.name = 'cat'
@@ -130,9 +128,9 @@ export default {
                 mixer.clipAction(animations[0]).play(); //FBX파일에 설정된 animation 배열에 있는 animation을 실행시키는 코드
                 
                 //렌더링 호출
-                animate(mixer);
+                animate();
                 })
-            } else if( this.data == '강아지') {
+            } else if( this.selected == '강아지') {
                 loader.load('/fbx/dog.fbx', object => {
                 let Object = object
                 Object.name = 'dog'
@@ -149,7 +147,7 @@ export default {
                 //렌더링 호출
                 animate(mixer);
                 })
-            } else {
+            } else if( this.selected == '사람' ){
                 loader.load('/fbx/human.fbx', object => {
                 let Object = object
                 Object.name = 'human'
@@ -167,7 +165,6 @@ export default {
                 animate(mixer);
               })
             }
-        
 
             const clock = new THREE.Clock();    
             //-------------------------------------------------------------------------
@@ -195,8 +192,8 @@ video {
     margin:13% 0 0 0;
 }
 canvas {
-    height: 100%;
-    width: 80%;
+    height: 50%;
+    width: 50%;
     margin: 10% 0 0 0;
 }
 </style>
