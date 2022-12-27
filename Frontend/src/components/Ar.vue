@@ -184,5 +184,8 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+video {
+    margin:13% 0 0 0;
+}
 </style>
