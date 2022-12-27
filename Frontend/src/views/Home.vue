@@ -5,7 +5,7 @@
       <div class="main">
         <AR/>
       </div>
-      <div style="margin-left:5%">togle box</div>
+      <div style="margin-left:2%">togle box</div>
     </div>
   </div>
 </template>
