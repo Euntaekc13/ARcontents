@@ -1,20 +1,16 @@
 <template>
-    <div>
-        <div class="Img"></div>
-        <div class="select_Box">
-            <div class="select_option">
-                <button class="selected">
-                    <a  href="/home/cat" style="text-decoration: none; color:black;"> 고양이 </a>
-                </button>
-                <button class="selected">
-                    <a  href="/home/dog" style="text-decoration: none; color:black;"> 강아지 </a>
-                </button>
-                <button class="selected">
-                    <a  href="/home/human" style="text-decoration: none; color:black;"> 사람 </a>
-                </button>
-            </div>
+<div id="arcontent">
+    <div class="header">
+        <div class="select_option">
+            <a  href="/home/cat" style="text-decoration: none"> 고양이 </a>
+            <a  href="/home/dog" style="text-decoration: none"> 강아지 </a>
+            <a  href="/home/human" style="text-decoration: none"> 사람 </a>
         </div>
     </div>
+    <main class="test">
+        <div class="Img"></div>
+    </main>
+</div>
 </template>
 
 <script>
@@ -22,13 +18,13 @@ import * as THREE from "three";
 import Stats from 'three/addons/libs/stats.module.js';
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import { AmbientLight, DirectionalLight } from 'three'
-import { ArToolkitSource, ArToolkitContext, ArMarkerControls} from '../WebGL/ar-threex';
+import { ArToolkitSource, ArToolkitContext, ArMarkerControls} from '../../WebGL/ar-threex';
 
 export default {
     name:'Ar',
     data(){
         return {
-            selected: this.$route.params.id ,//select 데이터 조건 값
+            selected: '' ,//select 데이터 조건 값
             renderStatus: false
         }
     },
@@ -37,11 +33,8 @@ export default {
             this.Graphics()
         }
     },
-    mounted(){
-        this.Graphics()
-    },
     methods:{
-        Graphics(){
+        Graphics(){ 
             var renderer = new THREE.WebGLRenderer({
                 antialias: true,
                 alpha: true
@@ -50,11 +43,11 @@ export default {
             let mixer 
             const img = document.querySelector('.Img')
             img.appendChild(renderer.domElement)
-            img.style.width = '50%'
-            img.style.height = '50%'
+            img.style.width = '100%'
+            img.style.height = '100%'
 
             renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-            renderer.setSize( 640, 480 );
+            renderer.setSize( 100, 200 );
             renderer.domElement.style.position = 'absolute'
             renderer.domElement.style.top = '0px'
             renderer.domElement.style.left = '0px'
@@ -116,7 +109,7 @@ export default {
            //                         FBX파일 로더
            //-------------------------------------------------------------------------
             let loader = new FBXLoader();
-            if(this.selected == 'cat'){
+            if(this.selected == '고양이'){
                 loader.load('/fbx/standcat.fbx', object => {
                 let Object = object
                 Object.name = 'cat'
@@ -126,14 +119,13 @@ export default {
 
                 //animation 설정 
                 const animations = object.animations;
-                console.log(animations);
                 mixer = new THREE.AnimationMixer( object )
                 mixer.clipAction(animations[0]).play(); //FBX파일에 설정된 animation 배열에 있는 animation을 실행시키는 코드
                 
                 //렌더링 호출
                 animate();
                 })
-            } else if( this.selected == 'dog') {
+            } else if( this.selected == '강아지') {
                 loader.load('/fbx/dog.fbx', object => {
                 let Object = object
                 Object.name = 'dog'
@@ -143,14 +135,13 @@ export default {
 
                 //animation 설정 
                 const animations = object.animations;
-                console.log(animations);
                 mixer = new THREE.AnimationMixer( object )
                 mixer.clipAction(animations[0]).play(); //FBX파일에 설정된 animation 배열에 있는 animation을 실행시키는 코드
                 
                 //렌더링 호출
                 animate(mixer);
                 })
-            } else if( this.selected == 'human' ){
+            } else if( this.selected == '사람' ){
                 loader.load('/fbx/human.fbx', object => {
                 let Object = object
                 Object.name = 'human'
@@ -160,7 +151,6 @@ export default {
 
                 //animation 설정 
                 const animations = object.animations;
-                console.log(animations);
                 mixer = new THREE.AnimationMixer( object )
                 mixer.clipAction(animations[0]).play(); //FBX파일에 설정된 animation 배열에 있는 animation을 실행시키는 코드
                 
@@ -190,25 +180,5 @@ export default {
 }
 </script>
 
-<style>
-video {
-    margin:13% 0 0 0;
-}
-canvas {
-    height: 50%;
-    width: 50%;
-    margin: 10% 0 0 0;
-}
-.select_option{
-    display: flex;
-}
-
-.selected{
-    margin-right: 1em;
-}
-.select_Box{
-    margin-left: 30%;
-    position:absolute;
-    top: 100px;
-}
+<style src="@/assets/style/AR.css" >
 </style>
