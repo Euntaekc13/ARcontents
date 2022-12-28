@@ -6,7 +6,7 @@ module.exports = defineConfig({
   runtimeCompiler: true,
   lintOnSave:false,
   devServer: {
-    https:true,
+    https: true,
     proxy: {
       '/serverApi': {
         target: VUE_APP_SERVER,
