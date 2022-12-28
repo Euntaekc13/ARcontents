@@ -15,7 +15,8 @@
 }
 .sidebar-button{
     border: 1px solid #cdd2d4;
-    font-size: 18px;
+    font-size: 16px;
+    margin-left: -12px;
 }
 .sidebar-button a:hover,
 .sidebar-button a:focus {

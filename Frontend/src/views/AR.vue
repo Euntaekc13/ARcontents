@@ -1,7 +1,25 @@
 <template>
-    <div class="IMG">
-        <img  src="../assets/KakaoTalk_20221227_142409466.png" alt="">
-    </div>
+    <main>
+        <div class="div-back">
+            <a class="to-left" href="/home" style="text-decoration: none"> </a>
+        </div>
+        <div class="main">
+            <div class="Img"></div>
+        </div>
+        <div class="select_Box">
+            <div class="select_option">
+                <button class="selected">
+                    <a  href="/ARcontents/cat" style="text-decoration: none; color:black;"> 고양이 </a>
+                </button>
+                <button class="selected">
+                   <a  href="/ARcontents/dog" style="text-decoration: none; color:black;"> 강아지 </a>
+                </button>
+                <button class="selected">
+                    <a  href="/ARcontents/human" style="text-decoration: none; color:black;"> 사람 </a>
+                </button>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script>
@@ -109,7 +127,6 @@ export default {
                 Object.name = 'cat'
                 Object.scale.x = Object.scale.y = Object.scale.z = 0.002
                 Object.position.set(0, 0, 0)
-                Object.rotation.y = 3
                 scene.add(Object)
 
                 //animation 설정 
@@ -180,13 +197,42 @@ export default {
 
 <style>
 video {
-    margin:13% 0 0 0;
+    margin:15% 0 0 0;
 }
 canvas {
     height: 50%;
     width: 50%;
-    margin: 80% 0 0 0;
+    margin: 10% 0 0 0;
 }
+.to-left {
+  color: black;
+  padding: 2em;
+  margin: 2.5em 0 0 0;
+  display: inline-block; /* or block */
+  position: relative;
+  border-color: black;
+  text-decoration: none;
+  transition: all 0.3s ease-out;
+}
+.to-left:before {
+  content: '◀';
+  font-size: 1.5em;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: 0.2em;
+  width: 1.8em;
+  height: 1.8em;
+  line-height: 1.3em;
+  border-color: inherit;
+  transition: transform 0.5s ease-in;
+}
+.to-left:hover {
+  color: #1976d2;
+  border-color: #1976d2;
+}
+
+
 .select_option{
     display: flex;
 }
@@ -195,13 +241,8 @@ canvas {
     margin-right: 1em;
 }
 .select_Box{
-    margin-left: 30%;
+    margin-left: 35%;
     position:absolute;
-    top: 700px;
-}
-img{
-    /* margin-left: 60%; */
-    width: 400px;
-    height: 400px;
+    top: 80%;
 }
 </style>
