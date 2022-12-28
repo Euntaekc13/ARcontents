@@ -117,6 +117,8 @@ export default {
             scene.add(ambientLight)
             scene.add(dirLight)
 
+
+
             //-------------------------------------------------------------------------
            //                         FBX파일 로더
            //-------------------------------------------------------------------------
@@ -127,6 +129,10 @@ export default {
                 Object.name = 'cat'
                 Object.scale.x = Object.scale.y = Object.scale.z = 0.002
                 Object.position.set(0, 0, 0)
+                Object.rotation.y = 0
+                Object.rotation.z = 0
+                Object.rotation.x = 0
+                // Object.rotation.x = 5
                 scene.add(Object)
 
                 //animation 설정 
@@ -159,7 +165,7 @@ export default {
                 loader.load('/fbx/human.fbx', object => {
                 let Object = object
                 Object.name = 'human'
-                Object.scale.x = Object.scale.y = Object.scale.z = 0.015
+                Object.scale.x = Object.scale.y = Object.scale.z = 0.005
                 Object.position.set(0, 0, 0)
                 scene.add(Object)
 
@@ -174,6 +180,7 @@ export default {
               })
             }
 
+
             const clock = new THREE.Clock();    
             //-------------------------------------------------------------------------
             //                            렌더링 함수
@@ -187,6 +194,7 @@ export default {
                 stats.update();
                 requestAnimationFrame( animate );
             };
+
             
             
         }
