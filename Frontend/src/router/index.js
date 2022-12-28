@@ -44,6 +44,18 @@ const routes = [
         path: '/auth/logout',
         component: () => import('../views/auth/logout'),
         meta: { header: false, noLogin: true }
+      },
+      {
+        path: '/ARcontents',
+        component: () => import('../views/AR.vue'),
+        children: [
+          {
+            path: '/ARcontents/:id',
+            component: () => import('../views/AR.vue'),
+            meta: { header: false , noLogin: false}
+          },
+        ],
+        meta: { header: false , noLogin: false}
       }
     ]
   },
